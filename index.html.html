@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Correção profissional de redação ENEM, concursos públicos e revisão acadêmica de TCC, dissertação e tese. Licenciado em Letras pela PUC-MG, aprovado pelo INEP/MEC. Feedback por competência. Filippe Barbosa, Belo Horizonte, atendimento online.">
+<meta name="keywords" content="correção de redação ENEM, corrigir redação ENEM online, correção redação nota mil, revisor de redação ENEM, feedback redação ENEM competências, correção redação concurso público, revisor redação concurso, correção texto dissertativo concurso, revisão de TCC, revisor TCC Belo Horizonte, revisão acadêmica online, revisor dissertação mestrado, revisão tese doutorado ABNT, corretor de redação online, revisor de textos online, correção de texto profissional, correção redação brasileiro exterior, revisão TCC online, correção ENEM brasileiro fora do Brasil, redação ENEM competência 3, proposta de intervenção ENEM, nota mil ENEM redação">
+<title>Filippe Barbosa · Corretor & Revisor de Redações</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --night: #252e28;
+  --deep: #2e3d34;
+  --forest: #3a5c47;
+  --moss: #4d7a62;
+  --sage: #8ecfa6;
+  --mist: #d4ede0;
+  --parchment: #faf6ea;
+  --parchment-dim: #ddd4b0;
+  --amber: #e0b050;
+  --amber-light: #f5d470;
+  --amber-pale: #faefc8;
+  --white: #fafaf8;
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'Outfit', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--night);
+  color: var(--parchment);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ─── CURSOR ─── */
+*, a, button { cursor: none; }
+.cursor {
+  position: fixed; z-index: 9999;
+  width: 10px; height: 10px;
+  background: var(--amber);
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s, background 0.2s;
+  mix-blend-mode: screen;
+}
+.cursor-ring {
+  position: fixed; z-index: 9998;
+  width: 36px; height: 36px;
+  border: 1px solid rgba(200,146,42,0.4);
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s, height 0.3s, border-color 0.3s;
+}
+body:has(a:hover) .cursor-ring,
+body:has(button:hover) .cursor-ring {
+  width: 56px; height: 56px;
+  border-color: var(--amber);
+}
+
+/* ─── NAV ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.4rem 4rem;
+  border-bottom: 1px solid rgba(74,109,90,0.2);
+  background: rgba(13,15,14,0.85);
+  backdrop-filter: blur(20px);
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 0.8rem;
+  text-decoration: none;
+}
+.nav-quill {
+  width: 22px; height: 22px;
+  filter: drop-shadow(0 0 8px rgba(200,146,42,0.6));
+}
+@keyframes quillWrite {
+  0%, 100% { transform: rotate(-10deg); }
+  50% { transform: rotate(-5deg) translateX(2px); }
+}
+.nav-name {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  font-weight: 300;
+  color: var(--parchment);
+  letter-spacing: 0.08em;
+}
+.nav-name strong { font-weight: 600; color: var(--amber-light); }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+.nav-links a {
+  font-size: 0.86rem; font-weight: 400;
+  color: var(--mist);
+  text-decoration: none;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  transition: color 0.2s;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute; bottom: -3px; left: 0; right: 100%;
+  height: 1px; background: var(--amber);
+  transition: right 0.3s;
+}
+.nav-links a:hover { color: var(--amber-light); }
+.nav-links a:hover::after { right: 0; }
+.nav-cta {
+  background: transparent !important;
+  border: 1px solid var(--amber) !important;
+  color: var(--amber) !important;
+  padding: 0.45rem 1.2rem !important;
+}
+.nav-cta:hover {
+  background: var(--amber) !important;
+  color: var(--night) !important;
+}
+.nav-cta::after { display: none !important; }
+
+/* ─── HERO ─── */
+.hero {
+  min-height: 100vh;
+  display: flex; align-items: center;
+  padding: 8rem 4rem 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Atmospheric background */
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 60% 80% at 75% 50%, rgba(28,43,36,0.9) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 20% 60%, rgba(200,146,42,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 40% at 50% 100%, rgba(13,15,14,1) 0%, transparent 60%);
+}
+
+/* Animated particles */
+.particles { position: absolute; inset: 0; overflow: hidden; }
+.particle {
+  position: absolute;
+  width: 2px; height: 2px;
+  background: var(--amber-pale);
+  border-radius: 50%;
+  opacity: 0;
+  animation: drift var(--dur) var(--delay) infinite ease-in-out;
+}
+@keyframes drift {
+  0% { opacity: 0; transform: translate(0, 0) scale(0); }
+  20% { opacity: 0.6; }
+  80% { opacity: 0.3; }
+  100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1.5); }
+}
+
+/* SVG Owl */
+.owl-container {
+  position: absolute; right: 5%; top: 50%;
+  transform: translateY(-50%);
+  width: 420px; height: 420px;
+  opacity: 0.12;
+  filter: drop-shadow(0 0 40px rgba(200,146,42,0.3));
+}
+.owl-container svg { width: 100%; height: 100%; }
+
+/* Decorative lines */
+.deco-lines {
+  position: absolute; right: 0; top: 0; bottom: 0;
+  width: 40%;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 60px,
+    rgba(74,109,90,0.06) 60px,
+    rgba(74,109,90,0.06) 61px
+  );
+  pointer-events: none;
+}
+
+.hero-content { position: relative; z-index: 2; max-width: 700px; }
+
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 1rem;
+  margin-bottom: 2rem;
+}
+.tag-line { width: 3rem; height: 1px; background: var(--amber); }
+.tag-text {
+  font-size: 0.82rem; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--amber);
+}
+
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-weight: 300;
+  line-height: 1.05;
+  color: var(--white);
+  margin-bottom: 2rem;
+}
+.hero h1 .line-italic {
+  display: block;
+  font-style: italic;
+  color: var(--amber-light);
+  font-weight: 300;
+}
+.hero h1 .line-bold {
+  display: block;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.hero-body {
+  font-size: 1rem; font-weight: 300;
+  color: var(--mist);
+  max-width: 480px; line-height: 1.9;
+  margin-bottom: 3rem;
+}
+
+.hero-actions { display: flex; gap: 1.2rem; flex-wrap: wrap; align-items: center; }
+.btn-glow {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  background: var(--amber);
+  color: var(--night);
+  padding: 0.9rem 2rem;
+  text-decoration: none;
+  font-size: 0.85rem; font-weight: 500;
+  letter-spacing: 0.06em;
+  border-radius: 1px;
+  transition: all 0.25s;
+  box-shadow: 0 0 30px rgba(200,146,42,0.3);
+}
+.btn-glow:hover {
+  background: var(--amber-light);
+  box-shadow: 0 0 50px rgba(200,146,42,0.5);
+  transform: translateY(-2px);
+}
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  color: var(--mist);
+  text-decoration: none;
+  font-size: 0.85rem; font-weight: 400;
+  letter-spacing: 0.06em;
+  padding-bottom: 2px;
+  border-bottom: 1px solid rgba(138,171,151,0.3);
+  transition: all 0.25s;
+}
+.btn-ghost:hover { color: var(--parchment); border-color: var(--parchment); }
+
+.hero-scroll {
+  position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  z-index: 2;
+}
+.scroll-line {
+  width: 1px; height: 50px;
+  background: linear-gradient(to bottom, var(--amber), transparent);
+  animation: scrollPulse 2s infinite;
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; transform: scaleY(1); }
+  50% { opacity: 1; transform: scaleY(1.2); }
+}
+.scroll-text {
+  font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--sage); writing-mode: vertical-rl;
+}
+
+/* ─── MARQUEE ─── */
+.marquee-wrap {
+  background: var(--forest);
+  border-top: 1px solid rgba(74,109,90,0.3);
+  border-bottom: 1px solid rgba(74,109,90,0.3);
+  overflow: hidden;
+  padding: 1rem 0;
+}
+.marquee-track {
+  display: flex; gap: 3rem;
+  animation: marquee 25s linear infinite;
+  width: max-content;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-item {
+  display: flex; align-items: center; gap: 1rem;
+  font-size: 0.84rem; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--sage); white-space: nowrap;
+}
+.marquee-dot { color: var(--amber); font-size: 1rem; }
+
+/* ─── SERVICES ─── */
+.services { padding: 8rem 4rem; background: var(--deep); }
+.section-head { margin-bottom: 5rem; }
+.section-eyebrow {
+  display: flex; align-items: center; gap: 0.8rem;
+  font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--amber); margin-bottom: 1.2rem;
+}
+.eyebrow-ornament {
+  display: flex; gap: 3px; align-items: center;
+}
+.orn-dot { width: 3px; height: 3px; background: var(--amber); border-radius: 50%; }
+.orn-line { width: 20px; height: 1px; background: var(--amber); }
+
+.section-h2 {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 300; line-height: 1.15;
+  color: var(--white);
+}
+.section-h2 em { font-style: italic; color: var(--amber-light); }
+
+.services-list { display: flex; flex-direction: column; gap: 1px; background: rgba(74,109,90,0.15); }
+
+.service-row {
+  display: grid; grid-template-columns: 80px 1fr 280px;
+  align-items: center; gap: 0;
+  background: var(--deep);
+  transition: background 0.3s;
+  overflow: hidden;
+}
+.service-row:hover { background: var(--forest); }
+
+.service-index {
+  padding: 2.5rem;
+  font-family: var(--serif);
+  font-size: 3rem; font-weight: 300;
+  color: rgba(74,109,90,0.4);
+  text-align: center;
+  border-right: 1px solid rgba(74,109,90,0.15);
+  line-height: 1;
+  transition: color 0.3s;
+}
+.service-row:hover .service-index { color: var(--amber); }
+
+.service-body { padding: 2.5rem 3rem; }
+.service-title {
+  font-family: var(--serif);
+  font-size: 1.5rem; font-weight: 400;
+  color: var(--white); margin-bottom: 0.6rem;
+  transition: color 0.3s;
+}
+.service-row:hover .service-title { color: var(--amber-light); }
+.service-text { font-size: 0.92rem !important;
+  font-size: 0.87rem; color: var(--mist);
+  line-height: 1.8; max-width: 480px;
+}
+.service-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
+.chip {
+  font-size: 0.86rem; letter-spacing: 0.08em;
+  border: 1px solid rgba(74,109,90,0.4);
+  color: var(--sage);
+  padding: 0.2rem 0.7rem;
+  border-radius: 20px;
+  transition: all 0.2s;
+}
+.service-row:hover .chip { border-color: rgba(200,146,42,0.3); color: var(--amber-pale); }
+
+.service-aside {
+  padding: 2.5rem;
+  border-left: 1px solid rgba(74,109,90,0.15);
+  text-align: right;
+}
+.aside-label {
+  font-size: 0.86rem; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--sage); margin-bottom: 0.4rem;
+}
+.aside-value {
+  font-family: var(--serif);
+  font-size: 1rem; font-weight: 400;
+  color: var(--parchment-dim);
+}
+.aside-cta {
+  display: inline-block; margin-top: 1rem;
+  font-size: 0.84rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--amber);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(200,146,42,0.3);
+  padding-bottom: 1px;
+  transition: border-color 0.2s;
+}
+.aside-cta:hover { border-color: var(--amber); }
+
+/* ─── ABOUT ─── */
+.about {
+  padding: 8rem 4rem;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 6rem; align-items: center;
+  background: var(--night);
+  position: relative; overflow: hidden;
+}
+.about::before {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0; width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--amber), transparent);
+  left: 50%;
+}
+
+.about-visual {
+  display: flex; flex-direction: column; gap: 1.5rem;
+}
+.about-card-main {
+  background: var(--forest);
+  border: 1px solid rgba(74,109,90,0.3);
+  padding: 2rem;
+  position: relative;
+}
+.about-card-main::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--amber), transparent);
+}
+.about-owl-small {
+  font-size: 2.5rem;
+  display: block; margin-bottom: 1rem;
+  filter: drop-shadow(0 0 12px rgba(200,146,42,0.5));
+}
+.about-name-display {
+  font-family: var(--serif);
+  font-size: 1.6rem; font-weight: 300;
+  color: var(--white); margin-bottom: 0.3rem;
+}
+.about-role-display {
+  font-size: 0.86rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--amber); margin-bottom: 1.5rem;
+}
+.about-stats {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: rgba(74,109,90,0.2);
+}
+.about-stat {
+  background: var(--deep); padding: 1rem; text-align: center;
+}
+.about-stat-n {
+  font-family: var(--serif);
+  font-size: 1.8rem; font-weight: 600;
+  color: var(--amber-light); display: block;
+}
+.about-stat-l {
+  font-size: 0.86rem; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--sage);
+}
+
+.about-creds-mini { display: flex; flex-direction: column; gap: 0.8rem; }
+.mini-cred {
+  display: flex; align-items: center; gap: 0.8rem;
+  padding: 0.8rem 1rem;
+  background: var(--deep);
+  border-left: 2px solid rgba(200,146,42,0.4);
+  font-size: 0.82rem; color: var(--mist);
+  transition: border-color 0.2s;
+}
+.mini-cred:hover { border-color: var(--amber); color: var(--parchment); }
+.mini-cred-icon { font-size: 1rem; flex-shrink: 0; }
+
+.about-text {}
+.about-text .section-h2 { margin-bottom: 1.5rem; }
+.about-p {
+  font-size: 0.95rem; color: var(--mist);
+  font-weight: 300; line-height: 1.9;
+  margin-bottom: 1.2rem;
+}
+.about-p strong { color: var(--parchment); font-weight: 500; }
+
+.about-quote {
+  margin-top: 2.5rem;
+  padding: 1.5rem 1.5rem 1.5rem 2rem;
+  border-left: 3px solid var(--amber);
+  background: rgba(200,146,42,0.04);
+}
+.about-quote-text {
+  font-family: var(--serif);
+  font-size: 1.1rem; font-style: italic;
+  color: var(--parchment-dim); line-height: 1.7;
+}
+
+/* ─── PROCESS ─── */
+.process {
+  padding: 8rem 4rem;
+  background: var(--forest);
+}
+.process-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 0; margin-top: 4rem;
+  border: 1px solid rgba(74,109,90,0.3);
+}
+.process-step {
+  padding: 2.5rem 2rem;
+  border-right: 1px solid rgba(74,109,90,0.3);
+  position: relative;
+  transition: background 0.3s;
+}
+.process-step:last-child { border-right: none; }
+.process-step:hover { background: rgba(200,146,42,0.04); }
+.process-arrow {
+  position: absolute; right: -12px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--amber); font-size: 1.2rem;
+  z-index: 1;
+}
+.process-step:last-child .process-arrow { display: none; }
+.process-n {
+  font-family: var(--serif);
+  font-size: 3.5rem; font-weight: 300;
+  color: rgba(200,146,42,0.15);
+  line-height: 1; margin-bottom: 1.5rem;
+}
+.process-icon { font-size: 1.5rem; margin-bottom: 1rem; display: block; }
+.process-title {
+  font-family: var(--serif);
+  font-size: 1.1rem; font-weight: 400;
+  color: var(--white); margin-bottom: 0.6rem;
+}
+.process-desc { font-size: 0.83rem; color: var(--mist); line-height: 1.7; }
+
+/* ─── EXTERIOR ─── */
+.exterior {
+  padding: 8rem 4rem;
+  background: var(--moss);
+  position: relative;
+  overflow: hidden;
+}
+.ext-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 50% 80% at 0% 50%, rgba(13,15,14,0.4) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 60% at 100% 30%, rgba(200,146,42,0.08) 0%, transparent 50%);
+  pointer-events: none;
+}
+.ext-content {
+  display: grid; grid-template-columns: 1.1fr 0.9fr;
+  gap: 5rem; align-items: start;
+  position: relative; z-index: 1;
+}
+.ext-p {
+  font-size: 1rem; color: rgba(255,255,255,0.7);
+  font-weight: 300; line-height: 1.9;
+  margin-bottom: 2.5rem; max-width: 460px;
+}
+.ext-cases { display: flex; flex-direction: column; gap: 1.2rem; }
+.ext-case {
+  display: flex; gap: 1rem; align-items: flex-start;
+  padding: 1.2rem 1.4rem;
+  background: rgba(0,0,0,0.2);
+  border-left: 2px solid rgba(212,160,64,0.4);
+  transition: border-color 0.2s, background 0.2s;
+}
+.ext-case:hover {
+  border-color: var(--amber);
+  background: rgba(0,0,0,0.3);
+}
+.ext-case-icon { font-size: 1.3rem; flex-shrink: 0; padding-top: 0.1rem; }
+.ext-case-title {
+  font-family: var(--serif);
+  font-size: 0.95rem; font-weight: 600;
+  color: var(--white); margin-bottom: 0.3rem;
+}
+.ext-case-desc { font-size: 0.82rem; color: rgba(255,255,255,0.6); line-height: 1.7; }
+
+.ext-globe-card {
+  background: rgba(0,0,0,0.25);
+  border: 1px solid rgba(212,160,64,0.25);
+  padding: 2rem;
+  position: sticky; top: 7rem;
+}
+.ext-globe {
+  font-size: 3rem; display: block;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0 16px rgba(212,160,64,0.4));
+}
+.ext-globe-title {
+  font-size: 0.82rem; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--amber-light); margin-bottom: 1rem;
+}
+.ext-countries {
+  display: flex; flex-wrap: wrap; gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+.ext-country {
+  font-size: 0.86rem;
+  background: rgba(255,255,255,0.07);
+  color: rgba(255,255,255,0.75);
+  padding: 0.3rem 0.7rem;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.ext-divider { height: 1px; background: rgba(212,160,64,0.2); margin: 1.2rem 0; }
+.ext-how-title {
+  font-size: 0.82rem; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--amber-light); margin-bottom: 1rem;
+}
+.ext-steps-mini { display: flex; flex-direction: column; gap: 0.8rem; }
+.ext-step-mini {
+  display: flex; gap: 0.8rem; align-items: flex-start;
+  font-size: 0.83rem; color: rgba(255,255,255,0.7); line-height: 1.5;
+}
+.ext-step-n {
+  width: 22px; height: 22px; flex-shrink: 0;
+  background: rgba(212,160,64,0.2);
+  border: 1px solid rgba(212,160,64,0.4);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.82rem; color: var(--amber-light);
+  font-weight: 500;
+}
+
+@media (max-width: 900px) {
+  .exterior { padding: 5rem 1.5rem; }
+  .ext-content { grid-template-columns: 1fr; gap: 3rem; }
+  .ext-globe-card { position: static; }
+}
+
+/* ─── CONTACT ─── */
+.contact { padding: 8rem 4rem; background: var(--night); }
+.contact-layout {
+  display: grid; grid-template-columns: 1fr 1.2fr;
+  gap: 6rem; align-items: start;
+  margin-top: 4rem;
+}
+.contact-left {}
+.contact-p {
+  font-size: 0.95rem; color: var(--mist);
+  font-weight: 300; line-height: 1.9;
+  margin-bottom: 3rem; max-width: 400px;
+}
+.contact-channels { display: flex; flex-direction: column; gap: 0; }
+.channel {
+  display: flex; align-items: center; gap: 1.2rem;
+  padding: 1.2rem 0;
+  border-bottom: 1px solid rgba(74,109,90,0.2);
+  text-decoration: none;
+  transition: padding-left 0.25s;
+}
+.channel:hover { padding-left: 0.5rem; }
+.channel-icon {
+  width: 40px; height: 40px;
+  background: var(--forest);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; flex-shrink: 0;
+  border-radius: 1px;
+  transition: background 0.2s;
+}
+.channel:hover .channel-icon { background: rgba(200,146,42,0.15); }
+.channel-label {
+  font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--sage); margin-bottom: 0.1rem;
+}
+.channel-value { font-size: 0.9rem; color: var(--parchment); }
+
+.contact-form-wrap {
+  background: var(--deep);
+  border: 1px solid rgba(74,109,90,0.25);
+  padding: 2.5rem;
+}
+.form-title {
+  font-family: var(--serif);
+  font-size: 1.4rem; font-weight: 300;
+  color: var(--white); margin-bottom: 2rem;
+}
+.cf { display: flex; flex-direction: column; gap: 1.2rem; }
+.cf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.cf-group { display: flex; flex-direction: column; gap: 0.5rem; }
+.cf-label {
+  font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--sage);
+}
+.cf-input, .cf-select, .cf-textarea {
+  background: var(--forest);
+  border: 1px solid rgba(74,109,90,0.3);
+  padding: 0.8rem 1rem;
+  font-family: var(--sans); font-size: 0.88rem;
+  color: var(--parchment);
+  outline: none; border-radius: 1px;
+  transition: border-color 0.2s;
+}
+.cf-input::placeholder, .cf-textarea::placeholder { color: var(--sage); }
+.cf-input:focus, .cf-select:focus, .cf-textarea:focus {
+  border-color: var(--amber);
+}
+.cf-select option { background: var(--forest); }
+.cf-textarea { resize: vertical; min-height: 90px; }
+.cf-submit {
+  background: var(--amber);
+  color: var(--night);
+  border: none; padding: 1rem;
+  font-family: var(--sans); font-size: 0.85rem; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  width: 100%; border-radius: 1px;
+  transition: all 0.25s; box-shadow: 0 0 20px rgba(200,146,42,0.2);
+}
+.cf-submit:hover {
+  background: var(--amber-light);
+  box-shadow: 0 0 40px rgba(200,146,42,0.4);
+  transform: translateY(-1px);
+}
+.cf-note { font-size: 0.84rem; color: var(--sage); text-align: center; }
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--deep);
+  border-top: 1px solid rgba(74,109,90,0.2);
+  padding: 3rem 4rem;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-brand {
+  display: flex; align-items: center; gap: 0.8rem;
+}
+.footer-owl { font-size: 1.2rem; }
+.footer-name {
+  font-family: var(--serif);
+  font-size: 1rem; font-weight: 300;
+  color: var(--mist);
+}
+.footer-name strong { color: var(--amber-light); }
+.footer-right { font-size: 0.86rem; color: var(--sage); }
+
+/* ─── WHATSAPP ─── */
+.wa-float {
+  position: fixed; bottom: 2rem; right: 2rem; z-index: 50;
+  width: 52px; height: 52px;
+  background: #25D366;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem;
+  text-decoration: none;
+  box-shadow: 0 4px 20px rgba(37,211,102,0.35);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.wa-float:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 30px rgba(37,211,102,0.5);
+}
+
+/* ─── ANIMATIONS ─── */
+.reveal {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 900px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+  .hero { padding: 7rem 1.5rem 5rem; }
+  .owl-container { opacity: 0.06; width: 250px; height: 250px; }
+  section, .services, .about, .process, .contact { padding: 5rem 1.5rem; }
+  .service-row { grid-template-columns: 50px 1fr; }
+  .service-aside { display: none; }
+  .about { grid-template-columns: 1fr; gap: 3rem; }
+  .about::before { display: none; }
+  .process-grid { grid-template-columns: 1fr 1fr; }
+  .process-arrow { display: none; }
+  .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
+  .cf-row { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav>
+  <a href="#" class="nav-logo">
+    <span class="nav-quill">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:22px;height:22px;animation:quillWrite 3s ease-in-out infinite;">
+        <path d="M20 4C17 1 10 3 6 8L3 21l4-2c1-3 3-6 6-8" stroke="#c8922a" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M6 8c2-1 5-1 7 1s2 5 1 7" stroke="#c8922a" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M3 21l3-3" stroke="#c8922a" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M10 7c3-2 7-3 10-3" stroke="#e8b84a" stroke-width="0.7" stroke-linecap="round" opacity="0.6"/>
+      </svg>
+    </span>
+    <span class="nav-name"><strong>Filippe</strong> Barbosa</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#processo">Processo</a></li>
+    <li><a href="#exterior">🌐 Exterior</a></li>
+    <li><a href="#contato" class="nav-cta">Solicitar</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="deco-lines"></div>
+  <div class="particles" id="particles"></div>
+
+  <!-- SVG Quill watermark -->
+  <div class="owl-container">
+    <svg viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Main quill feather -->
+      <path d="M160 20 C140 10, 60 40, 30 160" stroke="#c8922a" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+      <path d="M160 20 C170 50, 120 100, 80 160" stroke="#c8922a" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+      <!-- Feather barbs left -->
+      <path d="M148 32 C130 35, 100 45, 80 60" stroke="#c8922a" stroke-width="0.6" stroke-linecap="round" opacity="0.7"/>
+      <path d="M138 46 C118 50, 88 62, 66 78" stroke="#c8922a" stroke-width="0.6" stroke-linecap="round" opacity="0.7"/>
+      <path d="M126 62 C106 67, 76 80, 54 97" stroke="#c8922a" stroke-width="0.6" stroke-linecap="round" opacity="0.7"/>
+      <path d="M114 78 C94 84, 66 98, 46 116" stroke="#c8922a" stroke-width="0.6" stroke-linecap="round" opacity="0.6"/>
+      <path d="M102 94 C83 101, 57 116, 40 135" stroke="#c8922a" stroke-width="0.6" stroke-linecap="round" opacity="0.5"/>
+      <path d="M90 110 C73 118, 50 133, 36 152" stroke="#c8922a" stroke-width="0.5" stroke-linecap="round" opacity="0.4"/>
+      <!-- Feather barbs right -->
+      <path d="M152 36 C158 55, 155 78, 148 96" stroke="#c8922a" stroke-width="0.6" stroke-linecap="round" opacity="0.7"/>
+      <path d="M148 52 C152 70, 148 92, 138 110" stroke="#c8922a" stroke-width="0.6" stroke-linecap="round" opacity="0.6"/>
+      <path d="M142 70 C144 88, 138 108, 126 126" stroke="#c8922a" stroke-width="0.5" stroke-linecap="round" opacity="0.5"/>
+      <path d="M134 88 C134 106, 126 124, 112 140" stroke="#c8922a" stroke-width="0.5" stroke-linecap="round" opacity="0.4"/>
+      <!-- Quill nib -->
+      <path d="M30 160 L20 200 L40 180 Z" fill="none" stroke="#c8922a" stroke-width="0.8" stroke-linejoin="round"/>
+      <path d="M30 160 L25 185" stroke="#c8922a" stroke-width="0.5" stroke-linecap="round" opacity="0.6"/>
+      <!-- Ink drop -->
+      <circle cx="22" cy="204" r="3" fill="none" stroke="#c8922a" stroke-width="0.7" opacity="0.5"/>
+      <path d="M22 207 Q20 214 22 218" stroke="#c8922a" stroke-width="0.5" stroke-linecap="round" opacity="0.3"/>
+      <!-- Decorative lines suggesting paper -->
+      <line x1="10" y1="230" x2="120" y2="230" stroke="#c8922a" stroke-width="0.4" opacity="0.2"/>
+      <line x1="10" y1="236" x2="90" y2="236" stroke="#c8922a" stroke-width="0.4" opacity="0.15"/>
+    </svg>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-tag">
+      <div class="tag-line"></div>
+      <span class="tag-text">Corretor · Revisor · Orientador</span>
+    </div>
+    <h1>
+      <span class="line-italic">A palavra certa</span>
+      <span class="line-bold">no lugar certo.</span>
+    </h1>
+    <p class="hero-body">Correção especializada de redações para o ENEM e concursos públicos. Revisão acadêmica de TCCs, dissertações e teses. Atendimento 100% online — para quem escreve em português — no Brasil e no mundo.</p>
+    <div class="hero-actions">
+      <a href="https://wa.me/5531992357662?text=Olá%2C%20Filippe!%20Gostaria%20de%20solicitar%20uma%20correção." class="btn-glow" target="_blank">
+        Solicitar correção →
+      </a>
+      <a href="#servicos" class="btn-ghost">Ver serviços</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span class="scroll-text">rolar</span>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item"><span class="marquee-dot">🪶</span> Correção ENEM</span>
+    <span class="marquee-item"><span class="marquee-dot">·</span> Professor Formado pela PUC-Minas</span>
+    <span class="marquee-item"><span class="marquee-dot">·</span> Aprovado INEP/MEC</span>
+    <span class="marquee-item"><span class="marquee-dot">·</span> Concursos Públicos</span>
+    <span class="marquee-item"><span class="marquee-dot">·</span> Revisão Acadêmica</span>
+    <span class="marquee-item"><span class="marquee-dot">·</span> CEFET-MG</span>
+    <span class="marquee-item"><span class="marquee-dot">·</span> Brasil e Exterior</span>
+    <span class="marquee-item"><span class="marquee-dot">·</span> Atendimento Online</span>
+    <span class="marquee-item"><span class="marquee-dot">🪶</span> Correção ENEM</span>
+    <span class="marquee-item"><span class="marquee-dot">·</span> Professor Formado pela PUC-Minas</span>
+    <span class="marquee-item"><span class="marquee-dot">·</span> Aprovado INEP/MEC</span>
+    <span class="marquee-item"><span class="marquee-dot">·</span> Concursos Públicos</span>
+    <span class="marquee-item"><span class="marquee-dot">·</span> Revisão Acadêmica</span>
+    <span class="marquee-item"><span class="marquee-dot">·</span> CEFET-MG</span>
+    <span class="marquee-item"><span class="marquee-dot">·</span> Brasil e Exterior</span>
+    <span class="marquee-item"><span class="marquee-dot">·</span> Atendimento Online</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="servicos">
+  <div class="section-head reveal">
+    <div class="section-eyebrow">
+      <div class="eyebrow-ornament">
+        <div class="orn-dot"></div>
+        <div class="orn-line"></div>
+        <div class="orn-dot"></div>
+      </div>
+      O que ofereço
+    </div>
+    <h2 class="section-h2">Três serviços.<br><em>Uma obsessão pelo texto.</em></h2>
+  </div>
+  <div class="services-list">
+    <div class="service-row reveal">
+      <div class="service-index">01</div>
+      <div class="service-body">
+        <div class="service-title">Correção de Redação ENEM</div>
+        <p class="service-text">Análise completa nas cinco competências: da estrutura ao repertório sociocultural. Feedback detalhado por competência, nota estimada e orientações práticas de melhoria. Não corrijo apenas para aprovar: corrijo para você também entender.</p>
+        <div class="service-chips">
+          <span class="chip">C1 — Modalidade escrita</span>
+          <span class="chip">C2 — Compreensão do tema e uso do repertório sociocultural</span>
+          <span class="chip">C3 — Argumentação</span>
+          <span class="chip">C4 — Coesão</span>
+          <span class="chip">C5 — Proposta de intervenção</span>
+        </div>
+      </div>
+      <div class="service-aside">
+        <div class="aside-label">Prazo</div>
+        <div class="aside-value">Até 48 horas úteis</div>
+        <a href="https://wa.me/5531992357662" class="aside-cta" target="_blank">Solicitar →</a>
+      </div>
+    </div>
+    <div class="service-row reveal">
+      <div class="service-index">02</div>
+      <div class="service-body">
+        <div class="service-title">Correção para Concursos Públicos</div>
+        <p class="service-text">Avaliação técnica de redações dissertativas, pareceres e estudos de caso para concursos. Análise de aderência ao tema, adequação ao perfil da banca, estrutura lógico-argumentativa e linguagem formal. Com repertório direto da área pública.</p>
+        <div class="service-chips">
+          <span class="chip">Dissertativo-argumentativo</span>
+          <span class="chip">Parecer</span>
+          <span class="chip">Estudo de caso</span>
+          <span class="chip">Análise de banca</span>
+        </div>
+      </div>
+      <div class="service-aside">
+        <div class="aside-label">Prazo</div>
+        <div class="aside-value">Até 48 horas úteis</div>
+        <a href="https://wa.me/5531992357662" class="aside-cta" target="_blank">Solicitar →</a>
+      </div>
+    </div>
+    <div class="service-row reveal">
+      <div class="service-index">03</div>
+      <div class="service-body">
+        <div class="service-title">Revisão Acadêmica</div>
+        <p class="service-text">Revisão de TCCs, dissertações, teses, monografias e artigos científicos. Foco em norma culta, coesão, coerência, adequação acadêmica e formatação ABNT. Também realizo adaptação do texto às instruções e ao manual da instituição, refinamento textual e orientação sobre possíveis melhorias estruturais e argumentativas. Trabalho com o seu texto — aprimoro o que você construiu. Com possibilidade de devolutiva comentada para auxiliar na reescrita, caso seja do seu interesse.</p>
+        <div class="service-chips">
+          <span class="chip">TCC e MBA</span>
+          <span class="chip">Dissertação de mestrado</span>
+          <span class="chip">Tese de doutorado</span>
+          <span class="chip">Artigo científico</span>
+          <span class="chip">Formatação ABNT</span>
+          <span class="chip">Manual da instituição</span>
+          <span class="chip">Orientação e refinamento</span>
+        </div>
+      </div>
+      <div class="service-aside">
+        <div class="aside-label">Prazo</div>
+        <div class="aside-value">A combinar</div>
+        <a href="https://wa.me/5531992357662" class="aside-cta" target="_blank">Solicitar →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="sobre">
+  <div class="about-visual reveal">
+    <div class="about-card-main">
+      <span class="about-owl-small" style="filter:drop-shadow(0 0 12px rgba(200,146,42,0.5))">🪶</span>
+      <div class="about-name-display">Filippe Estevan Barbosa</div>
+      <div class="about-role-display">Corretor · Revisor · Professor de Português</div>
+      <div class="about-stats">
+        <div class="about-stat">
+          <span class="about-stat-n">+6</span>
+          <span class="about-stat-l">Anos corrigindo</span>
+        </div>
+        <div class="about-stat">
+          <span class="about-stat-n">5</span>
+          <span class="about-stat-l">Competências ENEM</span>
+        </div>
+        <div class="about-stat">
+          <span class="about-stat-n">BH</span>
+          <span class="about-stat-l">Brasil e exterior</span>
+        </div>
+      </div>
+    </div>
+    <div class="about-creds-mini">
+      <div class="mini-cred"><span class="mini-cred-icon">🎓</span> Professor Formado pela PUC-Minas</div>
+      <div class="mini-cred"><span class="mini-cred-icon">📋</span> Aprovado pelo INEP/MEC — Corretor ENEM</div>
+      <div class="mini-cred"><span class="mini-cred-icon">🏫</span> Estágio de docência — CEFET-MG</div>
+      <div class="mini-cred"><span class="mini-cred-icon">⚖️</span> Pós-graduado — Direito Administrativo e Gestão Pública</div>
+      <div class="mini-cred"><span class="mini-cred-icon">🏛️</span> Servidor público federal — UFMG desde 2013</div>
+    </div>
+  </div>
+  <div class="about-text reveal">
+    <div class="section-eyebrow">
+      <div class="eyebrow-ornament">
+        <div class="orn-dot"></div><div class="orn-line"></div><div class="orn-dot"></div>
+      </div>
+      Quem corrige
+    </div>
+    <h2 class="section-h2">Formado para <em>isso.</em><br>Não é hobby.</h2>
+    <p class="about-p">Professor formado em Letras pela <strong>PUC-Minas</strong> e fui aprovado no rigoroso processo de formação de corretores do ENEM conduzido pelo <strong>INEP/MEC</strong> — a mesma instituição responsável pelo exame que, só em 2025, contou com mais de quatro milhões e oitocentos mil inscritos.</p>
+    <p class="about-p">Realizei estágio de docência no <strong>CEFET-MG</strong>, onde elaborei propostas de escrita, ministrei aulas e avaliei redações de alunos do 3º ano do ensino médio em ambiente real de sala de aula. Sou também <strong>pós-graduado em Direito Administrativo e Gestão Pública</strong> — com nota máxima no TCC — o que me dá repertório direto sobre os temas mais cobrados em redações de concursos.</p>
+    <div class="about-quote">
+      <p class="about-quote-text">"Meu objetivo não é apenas corrigir. É te fazer entender por que o texto ficou assim — e como ele pode ser diferente na próxima vez."</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="processo">
+  <div class="section-head reveal">
+    <div class="section-eyebrow">
+      <div class="eyebrow-ornament">
+        <div class="orn-dot"></div><div class="orn-line"></div><div class="orn-dot"></div>
+      </div>
+      Como funciona
+    </div>
+    <h2 class="section-h2">Simples. Direto.<br><em>Sem burocracia.</em></h2>
+  </div>
+  <div class="process-grid">
+    <div class="process-step reveal">
+      <div class="process-arrow">›</div>
+      <div class="process-n">01</div>
+      <span class="process-icon">💬</span>
+      <div class="process-title">Entre em contato</div>
+      <p class="process-desc">Pelo WhatsApp ou formulário. Diga-me de qual serviço precisa e envie seu texto.</p>
+    </div>
+    <div class="process-step reveal">
+      <div class="process-arrow">›</div>
+      <div class="process-n">02</div>
+      <span class="process-icon">🎯</span>
+      <div class="process-title">Alinhamos o objetivo</div>
+      <p class="process-desc">Entendo o contexto — prova, concurso, banca, defesa — para a correção ser precisa.</p>
+    </div>
+    <div class="process-step reveal">
+      <div class="process-arrow">›</div>
+      <div class="process-n">03</div>
+      <span class="process-icon">🪶</span>
+      <div class="process-title">Leio com atenção</div>
+      <p class="process-desc">Análise completa, anotações no texto, avaliação por competência e nota estimada.</p>
+    </div>
+    <div class="process-step reveal">
+      <div class="process-n">04</div>
+      <span class="process-icon">📩</span>
+      <div class="process-title">Devolutiva completa</div>
+      <p class="process-desc">Você recebe o texto corrigido, relatório de pontos fortes e o que melhorar — com possibilidade de reescrita para treinar, caso seja do seu interesse.</p>
+    </div>
+  </div>
+</section>
+
+<!-- EXTERIOR -->
+<section class="exterior" id="exterior">
+  <div class="ext-bg"></div>
+  <div class="ext-content">
+    <div class="ext-left reveal">
+      <div class="section-eyebrow" style="color:var(--amber-light);">
+        <div class="eyebrow-ornament">
+          <div class="orn-dot" style="background:var(--amber-light)"></div>
+          <div class="orn-line" style="background:var(--amber-light)"></div>
+          <div class="orn-dot" style="background:var(--amber-light)"></div>
+        </div>
+        Brasileiros no exterior
+      </div>
+      <h2 class="section-h2" style="color:var(--white);">Onde você estiver,<br><em>a língua portuguesa</em><br>ainda é sua.</h2>
+      <p class="ext-p">Mora fora do Brasil e precisa de ajuda com a escrita em português? Atendo 100% online, em qualquer fuso horário — de Lisboa a Tóquio.</p>
+      <div class="ext-cases">
+        <div class="ext-case reveal">
+          <div class="ext-case-icon">🎓</div>
+          <div>
+            <div class="ext-case-title">TCC e trabalhos acadêmicos em português</div>
+            <div class="ext-case-desc">Cursa faculdade no exterior com trabalho final em português? Ou precisa de revisão para enviar a uma banca brasileira? Cuido da norma culta, estrutura e ABNT.</div>
+          </div>
+        </div>
+        <div class="ext-case reveal">
+          <div class="ext-case-icon">📋</div>
+          <div>
+            <div class="ext-case-title">Concursos consulares e do serviço exterior</div>
+            <div class="ext-case-desc">Provas para carreiras diplomáticas, consulares e do Itamaraty exigem redação dissertativa de alto nível. Corrijo com foco no perfil exato da banca.</div>
+          </div>
+        </div>
+        <div class="ext-case reveal">
+          <div class="ext-case-icon">📝</div>
+          <div>
+            <div class="ext-case-title">ENEM no exterior — acesso a universidades</div>
+            <div class="ext-case-desc">O ENEM é aceito por universidades em Portugal, França, Reino Unido, Canadá, Irlanda e outros países como critério de seleção. A redação vale até 1.000 pontos e pode ser o diferencial na sua candidatura. Uma boa nota abre portas em dezenas de instituições ao redor do mundo.</div>
+          </div>
+        </div>
+        <div class="ext-case reveal">
+          <div class="ext-case-icon">✍️</div>
+          <div>
+            <div class="ext-case-title">Revisão de textos profissionais</div>
+            <div class="ext-case-desc">Contratos, cartas formais, relatórios, e-mails corporativos ou documentos em português que precisam de revisão antes de serem enviados.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ext-right reveal">
+      <div class="ext-globe-card">
+        <div class="ext-globe">🌐</div>
+        <div class="ext-globe-title">Atendo brasileiros em qualquer país do mundo</div>
+        <div class="ext-countries">
+          <span class="ext-country">🇵🇹 Portugal</span>
+          <span class="ext-country">🇺🇸 Estados Unidos</span>
+          <span class="ext-country">🇬🇧 Reino Unido</span>
+          <span class="ext-country">🇨🇦 Canadá</span>
+          <span class="ext-country">🇩🇪 Alemanha</span>
+          <span class="ext-country">🇫🇷 França</span>
+          <span class="ext-country">🇦🇺 Austrália</span>
+          <span class="ext-country">🇯🇵 Japão</span>
+          <span class="ext-country">🌍 Qualquer lugar</span>
+        </div>
+        <div class="ext-divider"></div>
+        <div class="ext-how-title">Como funciona</div>
+        <div class="ext-steps-mini">
+          <div class="ext-step-mini"><span class="ext-step-n">1</span>Mande-me seu texto pelo WhatsApp ou e-mail</div>
+          <div class="ext-step-mini"><span class="ext-step-n">2</span>Combinamos prazo e valor — sem burocracia</div>
+          <div class="ext-step-mini"><span class="ext-step-n">3</span>Pagamento via Pix, transferência ou PayPal</div>
+          <div class="ext-step-mini"><span class="ext-step-n">4</span>Devolvo o texto corrigido com feedback completo</div>
+        </div>
+        <a href="https://wa.me/5531992357662?text=Olá%2C%20Filippe!%20Moro%20fora%20do%20Brasil%20e%20preciso%20de%20ajuda%20com%20um%20texto%20em%20português." class="btn-glow" target="_blank" style="display:block;text-align:center;margin-top:1.5rem;">Falar pelo WhatsApp →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contato">
+  <div class="section-eyebrow reveal">
+    <div class="eyebrow-ornament">
+      <div class="orn-dot"></div><div class="orn-line"></div><div class="orn-dot"></div>
+    </div>
+    Contato
+  </div>
+  <h2 class="section-h2 reveal">Pronto para escrever<br><em>melhor?</em></h2>
+  <div class="contact-layout">
+    <div class="contact-left reveal">
+      <p class="contact-p">WhatsApp para resposta mais rápida. Formulário para quem prefere organizar melhor o que precisa antes de entrar em contato. Atendimento 100% online — atendo qualquer pessoa que escreva em português, no Brasil e no mundo, em qualquer fuso horário.</p>
+      <div class="contact-channels">
+        <a href="https://wa.me/5531992357662" class="channel" target="_blank">
+          <div class="channel-icon">📱</div>
+          <div>
+            <div class="channel-label">WhatsApp</div>
+            <div class="channel-value">(31) 9 9235-7662</div>
+          </div>
+        </a>
+        <a href="mailto:filippe.estevan@gmail.com" class="channel">
+          <div class="channel-icon">✉️</div>
+          <div>
+            <div class="channel-label">E-mail</div>
+            <div class="channel-value">filippe.estevan@gmail.com</div>
+          </div>
+        </a>
+        <a href="https://www.linkedin.com/in/filippe-estevan-barbosa/" class="channel" target="_blank">
+          <div class="channel-icon">💼</div>
+          <div>
+            <div class="channel-label">LinkedIn</div>
+            <div class="channel-value">filippe-estevan-barbosa</div>
+          </div>
+        </a>
+        <div class="channel" style="cursor:default">
+          <div class="channel-icon">📍</div>
+          <div>
+            <div class="channel-label">Atendimento</div>
+            <div class="channel-value">Online · Brasil e no mundo</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form-wrap reveal">
+      <div class="form-title">Envie uma mensagem</div>
+      <form class="cf" onsubmit="handleSubmit(event)">
+        <div class="cf-row">
+          <div class="cf-group">
+            <label class="cf-label">Nome</label>
+            <input type="text" class="cf-input" placeholder="Seu nome" required>
+          </div>
+          <div class="cf-group">
+            <label class="cf-label">WhatsApp ou E-mail</label>
+            <input type="text" class="cf-input" placeholder="(31) 9 9999-0000" required>
+          </div>
+        </div>
+        <div class="cf-group">
+          <label class="cf-label">Serviço</label>
+          <select class="cf-select">
+            <option value="">Selecione o serviço</option>
+            <option>Correção de Redação ENEM</option>
+            <option>Correção para Concurso Público</option>
+            <option>Revisão Acadêmica (TCC / Dissertação / Tese)</option>
+          </select>
+        </div>
+        <div class="cf-group">
+          <label class="cf-label">Mensagem (opcional)</label>
+          <textarea class="cf-textarea" placeholder="Prazo, tipo de concurso, tema da redação..."></textarea>
+        </div>
+        <button type="submit" class="cf-submit">Enviar mensagem</button>
+        <p class="cf-note">Sem compromisso · Resposta em até 24h</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">
+    <span class="footer-owl">🪶</span>
+    <span class="footer-name"><strong>Filippe</strong> Barbosa · Correção & Revisão</span>
+  </div>
+  <div class="footer-right">© 2026 · Atendimento 100% online · Brasil e no mundo · <a href="https://www.linkedin.com/in/filippe-estevan-barbosa/" target="_blank" style="color:var(--amber);text-decoration:none;">LinkedIn</a></div>
+</footer>
+
+<a href="https://wa.me/5531992357662?text=Olá%2C%20Filippe!%20Gostaria%20de%20solicitar%20uma%20correção." class="wa-float" target="_blank" title="Chamar no WhatsApp"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" width="26" height="26"><path d="M16 2C8.268 2 2 8.268 2 16c0 2.444.636 4.875 1.846 7.025L2 30l7.195-1.818A13.937 13.937 0 0016 30c7.732 0 14-6.268 14-14S23.732 2 16 2z" fill="#fff"/><path d="M22.07 19.43c-.31-.155-1.836-.905-2.12-1.009-.285-.103-.492-.155-.7.155-.207.31-.801.965-.983 1.164-.181.2-.363.224-.672.069-.31-.155-1.308-.482-2.49-1.537-.92-.82-1.542-1.832-1.722-2.142-.18-.31-.019-.477.136-.631.14-.14.31-.362.465-.543.155-.18.207-.31.31-.517.104-.207.052-.388-.026-.543-.078-.155-.7-1.688-.958-2.31-.252-.607-.508-.524-.7-.534-.181-.009-.388-.011-.595-.011-.207 0-.543.078-.827.388-.284.31-1.086 1.061-1.086 2.588 0 1.526 1.112 3.001 1.267 3.208.155.207 2.188 3.34 5.302 4.685.741.32 1.319.51 1.77.653.744.236 1.42.203 1.955.123.596-.089 1.836-.75 2.095-1.475.259-.724.259-1.345.181-1.475-.077-.13-.284-.207-.595-.362z" fill="#25D366"/></svg></a>
+
+<script>
+// Custom cursor
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+function animateCursor() {
+  cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
+  rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+  ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+  requestAnimationFrame(animateCursor);
+}
+animateCursor();
+
+// Particles
+const pc = document.getElementById('particles');
+for (let i = 0; i < 30; i++) {
+  const p = document.createElement('div');
+  p.className = 'particle';
+  p.style.cssText = `
+    left: ${Math.random()*100}%;
+    top: ${Math.random()*100}%;
+    --dur: ${4 + Math.random()*8}s;
+    --delay: ${Math.random()*6}s;
+    --dx: ${(Math.random()-0.5)*120}px;
+    --dy: ${(Math.random()-0.5)*120}px;
+  `;
+  pc.appendChild(p);
+}
+
+// Reveal on scroll
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+    }
+  });
+}, { threshold: 0.1 });
+reveals.forEach(el => observer.observe(el));
+
+// Form
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.cf-submit');
+  btn.textContent = 'Mensagem enviada ✓';
+  btn.style.background = '#4a6d5a';
+  btn.disabled = true;
+  setTimeout(() => {
+    btn.textContent = 'Enviar mensagem';
+    btn.style.background = '';
+    btn.disabled = false;
+    e.target.reset();
+  }, 3000);
+}
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+</script>
+<!-- Schema.org structured data for SEO -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Filippe Barbosa - Correção de Redação e Revisão Acadêmica",
+  "description": "Correção profissional de redação ENEM, concursos públicos e revisão acadêmica de TCC, dissertação e tese. Atendimento online para quem escreve em português — no Brasil e no mundo.",
+  "telephone": "+5531992357662",
+  "email": "filippe.estevan@gmail.com",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Belo Horizonte",
+    "addressRegion": "MG",
+    "addressCountry": "BR"
+  },
+  "serviceType": ["Correção de Redação ENEM", "Correção Redação Concurso Público", "Revisão Acadêmica TCC", "Revisão Dissertação Mestrado", "Revisão Tese Doutorado"],
+  "areaServed": ["Brasil", "Exterior", "Brasileiros no exterior"]
+}
+</script>
+</body>
+</html>
